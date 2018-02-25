@@ -19,7 +19,7 @@ return [
         ],
         'user' => [
 	        'identityClass' => 'mdm\admin\models\User',
-	        'loginUrl' => ['rbac/user/login'],
+	        'loginUrl' => ['/site/login'],
         ],
 	    /*'user' => [
             'identityClass' => 'common\models\User',
@@ -27,27 +27,13 @@ return [
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],*/
     ],
-    'modules' => [
-	    'rbac' => [
-		    'class' => 'mdm\admin\Module',
-		    'controllerMap' => [
-			    'assignment' => [
-				    'class' => 'mdm\admin\controllers\AssignmentController',
-				    /* 'userClassName' => 'app\models\User', */
-				    'idField' => 'id',
-				    'usernameField' => 'username',
-//				    'fullnameField' => 'profile.full_name',
-		        ],
-            ],
-		    'layout' => 'left-menu',
-		    'mainLayout' => '@app/views/layouts/main.php',
-        ],
-    ],
     'as access' => [
 	    'class' => 'mdm\admin\components\AccessControl',
 	    'allowActions' => [
-		    'site/*',
-		    'gii/*',
+//		    'login/*',
+		    'site/signup',
+		    'site/login',
+		    'site/logout',
 		    'debug/*',
 //		    '*'
 	    ],

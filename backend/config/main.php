@@ -11,11 +11,30 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+	    'rbac' => [
+		    'class' => 'mdm\admin\Module',
+		    'controllerMap' => [
+			    'assignment' => [
+				    'class' => 'mdm\admin\controllers\AssignmentController',
+				    /* 'userClassName' => 'app\models\User', */
+				    'idField' => 'id',
+				    'usernameField' => 'username',
+//				    'fullnameField' => 'profile.full_name',
+			    ],
+		    ],
+		    'layout' => 'left-menu',
+		    'mainLayout' => '@app/views/layouts/main.php',
+	    ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl'=>'/admin',
+        ],
+        'user' => [
+	        'identityClass' => 'mdm\admin\models\User',
+	        'loginUrl' => ['/site/login'],
         ],
         /*'user' => [
             'identityClass' => 'common\models\User',
@@ -38,12 +57,23 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*'urlManager' => [
+        'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
-        ],*/
+        ],
+    ],
+    'as access' => [
+	    'class' => 'mdm\admin\components\AccessControl',
+	    'allowActions' => [
+//		    'login/*',
+		    'site/signup',
+		    'site/login',
+		    'site/logout',
+		    'debug/*',
+//		    '*'
+	    ],
     ],
     'params' => $params,
 ];

@@ -39,11 +39,11 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/rbac/user/login']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
 	      $menuItems[] = ['label' => 'Пользователи', 'url' => ['/rbac/default/index']];
         $menuItems[] = '<li>'
-            . Html::beginForm(['/rbac/user/logout'], 'post')
+            . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
